@@ -23,6 +23,7 @@ setup_requires = [
 tests_require = [
     'pytest>=3.4.2',
     'pytest-cov>=2.6.0',
+    'rundoc>=0.4.3',
 ]
 
 development_requires = [
@@ -52,6 +53,7 @@ development_requires = [
     # Advanced testing
     'coverage>=4.5.1',
     'tox>=2.9.1',
+    'invoke',
 ]
 
 {%- set license_classifiers = {
