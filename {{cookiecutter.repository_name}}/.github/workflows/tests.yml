@@ -11,17 +11,17 @@ on:
 
 jobs:
   lint:
-    runs-on: ${{ matrix.os }}
+    runs-on: {{ '${{ matrix.os }}' }}
     strategy:
       matrix:
         python-version: [3.8]
         os: [ubuntu-latest, macos-latest, windows-latest]
     steps:
     - uses: actions/checkout@v1
-    - name: Set up Python ${{ matrix.python-version }}
+    - name: Set up Python {{ '${{ matrix.python-version }}' }}
       uses: actions/setup-python@v2
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: {{ '${{ matrix.python-version }}' }}
     - name: Install package
       run: pip install invoke .[dev]
     - name: invoke lint
@@ -29,17 +29,17 @@ jobs:
 
 
   docs:
-    runs-on: ${{ matrix.os }}
+    runs-on: {{ '${{ matrix.os }}' }}
     strategy:
       matrix:
         python-version: ['3.8', '3.9', '3.10', '3.11']
         os: [ubuntu-20.04]
     steps:
     - uses: actions/checkout@v1
-    - name: Set up Python ${{ matrix.python-version }}
+    - name: Set up Python {{ '${{ matrix.python-version }}' }}
       uses: actions/setup-python@v2
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: {{ '${{ matrix.python-version }}' }}
     - name: Install package
       run: pip install .[dev]
     - name: make docs
@@ -47,17 +47,17 @@ jobs:
 
 
   readme:
-    runs-on: ${{ matrix.os }}
+    runs-on: {{ '${{ matrix.os }}' }}
     strategy:
       matrix:
         python-version: ['3.8', '3.9', '3.10', '3.11']
         os: [ubuntu-20.04, macos-latest]
     steps:
     - uses: actions/checkout@v1
-    - name: Set up Python ${{ matrix.python-version }}
+    - name: Set up Python {{ '${{ matrix.python-version }}' }}
       uses: actions/setup-python@v2
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: {{ '${{ matrix.python-version }}' }}
     - name: Install package and dependencies
       run: pip install invoke rundoc .
     - name: invoke readme
@@ -65,35 +65,42 @@ jobs:
 
 
   unit:
-    runs-on: ${{ matrix.os }}
+    runs-on: {{ '${{ matrix.os }}' }}
     strategy:
       matrix:
         python-version: ['3.8', '3.9', '3.10', '3.11']
         os: [ubuntu-20.04, macos-latest, windows-latest]
     steps:
     - uses: actions/checkout@v1
-    - name: Set up Python ${{ matrix.python-version }}
+    - name: Set up Python {{ '${{ matrix.python-version }}' }}
       uses: actions/setup-python@v2
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: {{ '${{ matrix.python-version }}' }}
     - name: Install package and dependencies
       run: pip install invoke .[test]
-    - name: invoke pytest
-      run: invoke pytest
+    - name: invoke unit
+      run: invoke unit
+
+{%- if cookiecutter.use_codecov_with_ci == 'y' %}
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v1
+      with:
+        file: ./coverage.xml
+{%- endif %}
 
 
   minimum:
-    runs-on: ${{ matrix.os }}
+    runs-on: {{ '${{ matrix.os }}' }}
     strategy:
       matrix:
         python-version: ['3.8', '3.9', '3.10', '3.11']
         os: [ubuntu-20.04, macos-latest]
     steps:
     - uses: actions/checkout@v1
-    - name: Set up Python ${{ matrix.python-version }}
+    - name: Set up Python {{ '${{ matrix.python-version }}' }}
       uses: actions/setup-python@v2
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: {{ '${{ matrix.python-version }}' }}
     - name: Install package and dependencies
       run: pip install invoke .[test]
     - name: invoke minimum
@@ -101,17 +108,17 @@ jobs:
 
 
   tutorials:
-    runs-on: ${{ matrix.os }}
+    runs-on: {{ '${{ matrix.os }}' }}
     strategy:
       matrix:
         python-version: ['3.8', '3.9', '3.10', '3.11']
         os: [ubuntu-20.04, macos-latest, windows-latest]
     steps:
     - uses: actions/checkout@v1
-    - name: Set up Python ${{ matrix.python-version }}
+    - name: Set up Python {{ '${{ matrix.python-version }}' }}
       uses: actions/setup-python@v2
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: {{ '${{ matrix.python-version }}' }}
     - name: Install package and dependencies
       run: pip install invoke jupyter matplotlib .
     - name: invoke tutorials
