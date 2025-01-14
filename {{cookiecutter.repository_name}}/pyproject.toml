@@ -1,12 +1,6 @@
-[build-system]
-requires = ['setuptools', 'wheel']
-build-backend = 'setuptools.build_meta'
-
 [project]
 name = '{{ cookiecutter.project_slug }}'
-version = '{{ cookiecutter.version }}'
 description = '{{ cookiecutter.project_short_description.replace("\'", "\\\'") }}'
-readme = 'README.md'
 authors = [
   {name = '{{ cookiecutter.license_owner }}', email = '{{ cookiecutter.license_owner_email }}'}
 ]
@@ -31,7 +25,11 @@ classifiers = [
     'Programming Language :: Python :: 3.11',
     'Programming Language :: Python :: 3.12',
 ]
+keywords = '{{ cookiecutter.project_slug }} {{ cookiecutter.package_name }} {{ cookiecutter.project_name }}'
+dynamic = ['version']
 license = {text = '{{ cookiecutter.open_source_license }}'}
+requires-python = '>=3.8,<3.13'
+readme = 'README.md'
 dependencies = [
     {%- if cookiecutter.command_line_interface|lower == 'click' %}'Click>=6.0',{%- endif %}
 ]
@@ -47,7 +45,7 @@ dev = [
     '{{ cookiecutter.project_slug }}[test]',
 
     # general
-    'bumpversion>=0.5.3',
+    'bump-my-version>=0.18.3',
     'pip>=9.0.1',
     'watchdog>=0.8.3',
 
@@ -79,6 +77,10 @@ homepage = 'https://github.com/{{ cookiecutter.github_owner }}/{{ cookiecutter.r
 [project.scripts]
 {{ cookiecutter.project_slug }} = '{{ cookiecutter.project_slug }}.cli:app'
 {% endif %}
+
+[build-system]
+requires = ['setuptools', 'wheel']
+build-backend = 'setuptools.build_meta'
 
 [tool.setuptools]
 include-package-data = true

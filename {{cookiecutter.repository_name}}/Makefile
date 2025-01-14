@@ -154,34 +154,34 @@ publish: dist publish-confirm ## package and upload a release
 bumpversion-release: ## Merge master to stable and bumpversion release
 	git checkout stable || git checkout -b stable
 	git merge --no-ff master -m"make release-tag: Merge branch 'master' into stable"
-	bumpversion release
+	bump-my-version bump release
 	git push --tags origin stable
 
 .PHONY: bumpversion-release-test
 bumpversion-release-test: ## Merge master to stable and bumpversion release
 	git checkout stable || git checkout -b stable
 	git merge --no-ff master -m"make release-tag: Merge branch 'master' into stable"
-	bumpversion release --no-tag
+	bump-my-version bump release --no-tag
 	@echo git push --tags origin stable
 
 .PHONY: bumpversion-patch
 bumpversion-patch: ## Merge stable to master and bumpversion patch
 	git checkout master
 	git merge stable
-	bumpversion --no-tag patch
+	bump-my-version bump --no-tag patch
 	git push
 
 .PHONY: bumpversion-minor
 bumpversion-minor: ## Bump the version the next minor skipping the release
-	bumpversion --no-tag minor
+	bump-my-version bump --no-tag minor
 
 .PHONY: bumpversion-major
 bumpversion-major: ## Bump the version the next major skipping the release
-	bumpversion --no-tag major
+	bump-my-version bump --no-tag major
 
 .PHONY: bumpversion-candidate
 bumpversion-candidate: ## Bump the version to the next candidate
-	bumpversion candidate --no-tag
+	bump-my-version bump candidate --no-tag
 
 .PHONY: bumpversion-revert
 bumpversion-revert: ## Undo a previous bumpversion-release
