@@ -46,8 +46,8 @@ def _validate_python_version(line):
 
 @task
 def install_minimum(c):
-    with open('setup.py', 'r') as setup_py:
-        lines = setup_py.read().splitlines()
+    with open('pyproject.toml', 'r') as pyproject_file:
+        lines = pyproject_file.read().splitlines()
 
     versions = []
     started = False
@@ -68,7 +68,7 @@ def install_minimum(c):
                     requirement += version
                 versions.append(requirement)
 
-        elif (line.startswith('install_requires = [')):
+        elif (line.startswith('dependencies = [')):
             started = True
 
     c.run(f'python -m pip install {" ".join(versions)}')
