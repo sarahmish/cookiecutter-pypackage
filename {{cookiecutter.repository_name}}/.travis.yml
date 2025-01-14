@@ -6,9 +6,7 @@ python:
   - 3.9
   - 3.10
   - 3.11
-{%- if cookiecutter.support_py2 == 'y' %}
-  - 2.7
-{%- endif %}
+  - 3.12
 
 matrix:
   include:
