@@ -45,6 +45,7 @@ dev = [
     '{{ cookiecutter.project_slug }}[test]',
 
     # general
+    'build>=1.0.0,<2',
     'bump-my-version>=0.18.3',
     'pip>=9.0.1',
     'watchdog>=0.8.3',
