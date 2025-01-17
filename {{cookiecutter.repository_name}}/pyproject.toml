@@ -25,7 +25,7 @@ classifiers = [
     'Programming Language :: Python :: 3.11',
     'Programming Language :: Python :: 3.12',
 ]
-keywords = '{{ cookiecutter.project_slug }} {{ cookiecutter.package_name }} {{ cookiecutter.project_name }}'
+keywords = ['{{ cookiecutter.project_slug }}','{{ cookiecutter.package_name }}','{{ cookiecutter.project_name }}']
 dynamic = ['version']
 license = {text = '{{ cookiecutter.open_source_license }}'}
 requires-python = '>=3.8,<3.13'
