@@ -35,7 +35,7 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-tests = [
+test = [
     'pytest>=3.4.2',
     'pytest-cov>=2.6.0',
     'pytest-runner>=2.11.1',
